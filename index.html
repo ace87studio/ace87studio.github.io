@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sealcoating Simulator — Press Kit</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/x-icon" href="assets/icon/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/icon/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/icon/android-chrome-512x512.png">
+  <link rel="manifest" href="assets/icon/site.webmanifest">
+
+  <style>
+    :root {
+      --base: #FFF4DE;
+      --accent: #D89320;
+      --accent-dark: #b1771a;
+      --ink: #3a2c14;
+      --ink-soft: #7a6743;
+      --card: #FFFDF7;
+      --line: #ecdcbc;
+      --deep: #2a2113;
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(120, 86, 20, .10);
+      --shadow-sm: 0 4px 14px rgba(120, 86, 20, .08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      font-family: "Fredoka", sans-serif;
+      font-weight: 400;
+      background: var(--base);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%
+    }
+
+    a {
+      color: var(--accent-dark);
+      text-decoration: none
+    }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.15;
+      letter-spacing: -.01em
+    }
+
+    .accent {
+      color: var(--accent)
+    }
+
+    header.nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 244, 222, .86);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line)
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      height: 64px
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: .02em;
+      white-space: nowrap
+    }
+
+    .brand .dot {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      background: var(--accent);
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 13px
+    }
+
+    .brand-logo {
+      height: 40px;
+      width: auto;
+      max-width: 170px;
+      object-fit: contain;
+      display: block
+    }
+
+    .foot-logo {
+      display: inline-block;
+      margin-bottom: 16px
+    }
+
+    .foot-logo img {
+      height: 64px;
+      width: auto;
+      max-width: 240px;
+      object-fit: contain;
+      display: block;
+      filter: brightness(0) invert(1);
+      opacity: .92
+    }
+
+    nav.links {
+      margin-left: auto;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap
+    }
+
+    nav.links a {
+      color: var(--ink-soft);
+      font-weight: 500;
+      font-size: 14px
+    }
+
+    nav.links a:hover {
+      color: var(--accent)
+    }
+
+    .nav-toggle {
+      display: none;
+      width: 40px;
+      height: 36px;
+      margin-left: 4px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      color: var(--ink);
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto
+    }
+
+    .nav-toggle svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round
+    }
+
+    .lang {
+      display: flex;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      overflow: hidden;
+      background: #fff
+    }
+
+    .lang-btn {
+      border: none;
+      background: transparent;
+      font-family: "Fredoka", sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      padding: 7px 12px;
+      cursor: pointer;
+      color: var(--ink-soft);
+      letter-spacing: .04em
+    }
+
+    .lang-btn.active {
+      background: var(--accent);
+      color: #fff
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 15px;
+      box-shadow: var(--shadow-sm);
+      transition: transform .12s ease, background .12s ease
+    }
+
+    .btn:hover {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+      color: #fff
+    }
+
+    .btn.ghost {
+      background: transparent;
+      color: var(--accent-dark);
+      border: 1.5px solid var(--accent)
+    }
+
+    .hero {
+      padding: 64px 0 40px;
+      position: relative;
+      overflow: hidden
+    }
+
+    .hero:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(1200px 360px at 80% -10%, rgba(216, 147, 32, .18), transparent 60%)
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 40px;
+      align-items: center;
+      position: relative
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      font-size: 13px;
+      color: var(--accent-dark);
+      background: #fff;
+      border: 1px solid var(--line);
+      padding: 6px 12px;
+      border-radius: 999px;
+      margin-bottom: 18px
+    }
+
+    .hero h1 {
+      font-size: 56px;
+      font-weight: 700
+    }
+
+    .hero .tagline {
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--ink-soft);
+      margin-top: 14px;
+      max-width: 48ch
+    }
+
+    .badges {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 26px
+    }
+
+    .badge {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink-soft)
+    }
+
+    .badge b {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      margin-top: 28px;
+      flex-wrap: wrap
+    }
+
+    .ph {
+      position: relative;
+      background: repeating-linear-gradient(45deg, #fbedd2, #fbedd2 14px, #f7e4c2 14px, #f7e4c2 28px);
+      border: 2px dashed #e3c98e;
+      border-radius: var(--radius);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: #b08a45;
+      font-weight: 600
+    }
+
+    .ph small {
+      display: block;
+      font-weight: 500;
+      color: #bb9758;
+      margin-top: 4px;
+      font-size: 13px
+    }
+
+    .hero-art {
+      aspect-ratio: 16/10;
+      box-shadow: var(--shadow)
+    }
+
+    .ph .ph-ico {
+      font-size: 30px;
+      margin-bottom: 6px;
+      opacity: .7
+    }
+
+    section {
+      padding: 54px 0;
+      border-top: 1px solid var(--line)
+    }
+
+    .sec-head {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 26px
+    }
+
+    .sec-head h2 {
+      font-size: 32px;
+      font-weight: 600
+    }
+
+    .sec-head .kick {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: .1em;
+      text-transform: uppercase
+    }
+
+    .lead {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--ink);
+      max-width: 72ch
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px
+    }
+
+    .fact {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px 18px;
+      box-shadow: var(--shadow-sm)
+    }
+
+    .fact .k {
+      font-size: 13px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      font-weight: 600
+    }
+
+    .fact .v {
+      font-size: 16px;
+      font-weight: 400;
+      margin-top: 3px
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+      transition: transform .14s ease, box-shadow .14s ease
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow)
+    }
+
+    .card .ico {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: rgba(216, 147, 32, .14);
+      color: var(--accent-dark);
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      margin-bottom: 14px
+    }
+
+    .card h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 6px
+    }
+
+    .card p {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--ink-soft)
+    }
+
+    .team {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px
+    }
+
+    .dev {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow-sm)
+    }
+
+    .dev h3 {
+      font-size: 19px;
+      font-weight: 800
+    }
+
+    .dev .role {
+      color: var(--accent-dark);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin: 2px 0 10px
+    }
+
+    .dev p {
+      font-size: 15px;
+      color: var(--ink-soft);
+      margin-bottom: 14px
+    }
+
+    .dev a.devlink {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--accent-dark)
+    }
+
+    .dev a.devlink:hover {
+      color: var(--accent)
+    }
+
+    .dev a.devlink svg {
+      width: 15px;
+      height: 15px;
+      fill: currentColor
+    }
+
+    .dev-head {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 14px
+    }
+
+    .dev-avatar {
+      width: 74px;
+      height: 74px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--accent);
+      box-shadow: var(--shadow-sm);
+      background: var(--base);
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .dev-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block
+    }
+
+    .avatar-fallback {
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--accent-dark);
+      letter-spacing: .02em
+    }
+
+    .tech {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 32px
+    }
+
+    .tech li {
+      list-style: none;
+      padding-left: 26px;
+      position: relative;
+      color: var(--ink-soft);
+      font-size: 16px;
+      font-weight: 400;
+      margin: 6px 0
+    }
+
+    .tech li:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(216, 147, 32, .16)
+    }
+
+    .tech li b {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .trailer {
+      aspect-ratio: 16/9;
+      box-shadow: var(--shadow)
+    }
+
+    .media2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px
+    }
+
+    .video-embed {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius)
+    }
+
+    .video-embed iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block
+    }
+
+    .soon {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 2;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: .04em;
+      padding: 6px 13px;
+      border-radius: 999px;
+      box-shadow: var(--shadow-sm)
+    }
+
+    .shots {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 18px
+    }
+
+    .shot {
+      position: relative;
+      aspect-ratio: 16/9;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      background: var(--card)
+    }
+
+    .shot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block
+    }
+
+    .logos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px
+    }
+
+    .logo-box {
+      position: relative;
+      min-height: 180px;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center
+    }
+
+    .dl {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+      font-size: 13px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      box-shadow: var(--shadow-sm);
+      text-decoration: none;
+      z-index: 3;
+      transition: background .12s ease, transform .12s ease
+    }
+
+    .dl:hover {
+      background: var(--accent-dark);
+      color: #fff;
+      transform: translateY(-1px)
+    }
+
+    .dl svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor
+    }
+
+    .logo-box.card-bg {
+      background: var(--card);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm)
+    }
+
+    .logo-box img {
+      max-height: 120px;
+      max-width: 100%;
+      width: auto;
+      object-fit: contain;
+      display: block
+    }
+
+    /* Click a downloadable image to preview it full screen */
+    .shot img,
+    .logo-box img,
+    .hero-art img {
+      cursor: zoom-in
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      padding: 40px 24px;
+      background: rgba(26, 19, 6, .9);
+      backdrop-filter: blur(8px)
+    }
+
+    .lightbox.open {
+      display: flex
+    }
+
+    .lightbox img {
+      max-width: 100%;
+      max-height: 78vh;
+      width: auto;
+      object-fit: contain;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      background: var(--card)
+    }
+
+    .lb-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .lb-bar .btn svg {
+      width: 15px;
+      height: 15px;
+      fill: currentColor;
+      vertical-align: -2px;
+      margin-right: 4px
+    }
+
+    .lb-close {
+      position: absolute;
+      top: 18px;
+      right: 22px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, .14);
+      color: #fff;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: background .12s ease
+    }
+
+    .lb-close:hover {
+      background: rgba(255, 255, 255, .26)
+    }
+
+    footer {
+      background: var(--deep);
+      color: #f4e7cf;
+      margin-top: 10px
+    }
+
+    footer .wrap {
+      padding: 46px 24px
+    }
+
+    .foot-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 30px
+    }
+
+    footer h3 {
+      color: #fff;
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 10px
+    }
+
+    footer p,
+    footer a {
+      color: #d9c8a6;
+      font-size: 15px;
+      font-weight: 400;
+    }
+
+    footer a:hover {
+      color: var(--accent)
+    }
+
+    .foot-k {
+      font-size: 13px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 6px
+    }
+
+    .copy {
+      border-top: 1px solid rgba(255, 255, 255, .1);
+      margin-top: 34px;
+      padding-top: 18px;
+      font-size: 14px;
+      font-weight: 300;
+      color: #b6a079
+    }
+
+    .note {
+      font-size: 13px;
+      color: #bb9758;
+      margin-top: 10px
+    }
+
+    @media(max-width:860px) {
+      .hero {
+        padding: 48px 0 32px
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 28px
+      }
+
+      .hero h1 {
+        font-size: 46px
+      }
+
+      .cards {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .tech {
+        grid-template-columns: 1fr
+      }
+
+      .facts {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .foot-grid {
+        grid-template-columns: 1fr
+      }
+
+      .media2 {
+        grid-template-columns: 1fr
+      }
+
+      section {
+        padding: 44px 0
+      }
+    }
+
+    @media(max-width:1080px) {
+      .nav-toggle {
+        display: inline-flex
+      }
+
+      .lang {
+        margin-left: auto
+      }
+
+      nav.links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: 0;
+        margin: 0;
+        padding: 6px 24px 14px;
+        background: var(--base);
+        border-bottom: 1px solid var(--line);
+        box-shadow: var(--shadow);
+        display: none
+      }
+
+      nav.links.open {
+        display: flex
+      }
+
+      nav.links a {
+        width: 100%;
+        padding: 12px 2px;
+        font-size: 16px;
+        border-bottom: 1px solid var(--line)
+      }
+
+      nav.links a:last-child {
+        border-bottom: none
+      }
+    }
+
+    @media(max-width:560px) {
+      .wrap {
+        padding: 0 16px
+      }
+
+      .nav-inner {
+        gap: 10px
+      }
+
+      .nav-inner>a.btn {
+        display: none
+      }
+
+      .brand {
+        font-size: 16px;
+        gap: 8px
+      }
+
+      .brand-logo {
+        height: 34px
+      }
+
+      .btn {
+        padding: 9px 14px;
+        font-size: 14px
+      }
+
+      .hero {
+        padding: 36px 0 26px
+      }
+
+      .hero h1 {
+        font-size: 38px
+      }
+
+      .hero .tagline {
+        font-size: 18px
+      }
+
+      .hero-cta {
+        flex-direction: column;
+        align-items: stretch
+      }
+
+      .hero-cta .btn {
+        text-align: center
+      }
+
+      .sec-head {
+        flex-direction: column;
+        gap: 4px
+      }
+
+      .sec-head h2 {
+        font-size: 28px
+      }
+
+      .lead {
+        font-size: 18px
+      }
+
+      .cards {
+        grid-template-columns: 1fr
+      }
+
+      .team {
+        grid-template-columns: 1fr
+      }
+
+      .shots {
+        grid-template-columns: 1fr
+      }
+
+      .logos {
+        grid-template-columns: 1fr
+      }
+
+      .facts {
+        grid-template-columns: 1fr
+      }
+
+      section {
+        padding: 38px 0
+      }
+    }
+
+    @media(max-width:380px) {
+      .hero h1 {
+        font-size: 34px
+      }
+
+      .brand {
+        font-size: 0
+      }
+
+      .brand-logo {
+        height: 32px
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand">
+        <img src="assets/ace87-studios-logo.png" alt="ACE 87 Studios" class="brand-logo"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+        <span class="dot" style="display:none">SC</span>
+        Sealcoating Simulator
+      </div>
+      <nav class="links">
+        <a href="#about" data-en="About" data-es="El juego">About</a>
+        <a href="#facts" data-en="Fact Sheet" data-es="Ficha">Fact Sheet</a>
+        <a href="#features" data-en="Features" data-es="Características">Features</a>
+        <a href="#tech" data-en="Tech" data-es="Tecnología">Tech</a>
+        <a href="#media" data-en="Media" data-es="Media">Media</a>
+        <a href="#team" data-en="Team" data-es="Equipo">Team</a>
+        <a href="#contact" data-en="Contact" data-es="Contacto">Contact</a>
+      </nav>
+      <div class="lang">
+        <button class="lang-btn" data-lang="es" onclick="setLang('es')">ESP</button>
+        <button class="lang-btn active" data-lang="en" onclick="setLang('en')">ENG</button>
+      </div>
+      <a class="btn" href="https://ace87.itch.io/sealcoating-simulator" target="_blank" rel="noopener"
+        data-en="View on itch.io" data-es="Ver en itch.io">View on itch.io</a> <button class="nav-toggle"
+        aria-label="Menu" onclick="toggleMenu()">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <section class="hero" style="border-top:none">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow" data-en="Press Kit · In Development" data-es="Press Kit · En desarrollo">Press Kit · In
+          Development</span>
+        <h1>Sealcoating<br><span class="accent">Simulator</span></h1>
+        <p class="tagline"
+          data-en="There is something weirdly relaxing about sealing a driveway. Pour it, spread it, and watch a tired old lot turn deep black and glossy."
+          data-es="Sellar una entrada tiene algo raramente relajante. Volcá, esparcí y mirá cómo un asfalto gastado se vuelve negro y brillante.">
+          There is something weirdly relaxing about sealing a driveway. Pour it, spread it, and watch a tired old lot
+          turn deep black and glossy.
+        </p>
+        <div class="badges">
+          <span class="badge"><b>PC</b> · Steam</span>
+          <span class="badge" data-en="Status: <b>In Development</b>" data-es="Estado: <b>En desarrollo</b>">Status:
+            <b>In Development</b></span>
+          <span class="badge" data-en="By <b>ACE 87 Studios</b>" data-es="Por <b>ACE 87 Studios</b>">By <b>ACE 87
+              Studios</b></span>
+        </div>
+        <div class="hero-cta">
+          <a class="btn" href="https://ace87.itch.io/sealcoating-simulator" target="_blank" rel="noopener"
+            data-en="View on itch.io" data-es="Ver en itch.io">View on itch.io</a>
+          <a class="btn ghost" href="#features" data-en="Explore the game" data-es="Conocé el juego">Explore the
+            game</a>
+          <a class="btn ghost" href="#media" data-en="Watch videos" data-es="Ver videos">Watch videos</a>
+        </div>
+      </div>
+      <div class="ph hero-art">
+        <div>
+          <img src="assets/keyart.jpg" alt="Sealcoating Simulator"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        </div>
+        <a class="dl" href="assets/keyart.jpg" download><svg viewBox="0 0 24 24">
+            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+          </svg><span data-en="Download" data-es="Descargar">Download</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kick" data-en="About" data-es="El juego">About</span>
+        <h2 data-en="What is it?" data-es="¿De qué se trata?">What is it?</h2>
+      </div>
+      <p class="lead"
+        data-en="Sealcoating Simulator is a first-person game about a job most people never think about: sealing asphalt. You grab the hose, pour the sealant, and drag it around with the squeegee until the last patch of grey concrete is gone. Keep an eye on your tank, refill when you run low, and aim for a clean 100%. When the lot is done, slide between the before and after and take in the difference. The twist is the sealant itself. It actually flows, pools and settles like a real liquid, so every job feels a little different."
+        data-es="Sealcoating Simulator es un juego en primera persona sobre un laburo en el que casi nadie piensa: sellar asfalto. Agarrás la manguera, volcás el sellador y lo arrastrás con el secador hasta que no queda ni un pedacito de gris a la vista. Cuidá el tanque, recargá cuando se te acaba y buscá un 100% prolijo. Cuando el lugar queda listo, deslizás entre el antes y el después y disfrutás la diferencia. Lo distinto es el sellador en sí: fluye, se encharca y se asienta como un líquido de verdad, así cada trabajo se siente un poco distinto.">
+        Sealcoating Simulator is a first-person game about a job most people never think about: sealing asphalt. You
+        grab the hose, pour the sealant, and drag it around with the squeegee until the last patch of grey concrete is
+        gone. Keep an eye on your tank, refill when you run low, and aim for a clean 100%. When the lot is done, slide
+        between the before and after and take in the difference. The twist is the sealant itself. It actually flows,
+        pools and settles like a real liquid, so every job feels a little different.
+      </p>
+    </div>
+  </section>
+
+  <section id="facts">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kick" data-en="Quick reference" data-es="Datos rápidos">Quick reference</span>
+        <h2 data-en="Fact Sheet" data-es="Ficha técnica">Fact Sheet</h2>
+      </div>
+      <div class="facts">
+        <div class="fact">
+          <div class="k" data-en="Developer" data-es="Desarrollador">Developer</div>
+          <div class="v">ACE 87 Studios</div>
+        </div>
+        <div class="fact">
+          <div class="k" data-en="Based in" data-es="Ubicación">Based in</div>
+          <div class="v">Buenos Aires, Argentina</div>
+        </div>
+        <div class="fact">
+          <div class="k" data-en="Release date" data-es="Lanzamiento">Release date</div>
+          <div class="v" data-en="In Development, TBA" data-es="En desarrollo, a definir">In Development, TBA</div>
+        </div>
+        <div class="fact">
+          <div class="k" data-en="Platforms" data-es="Plataformas">Platforms</div>
+          <div class="v" data-en="PC (Steam), coming soon" data-es="PC (Steam), pronto">PC (Steam), coming soon</div>
+        </div>
+        <div class="fact">
+          <div class="k" data-en="Price" data-es="Precio">Price</div>
+          <div class="v" data-en="TBA" data-es="A definir">TBA</div>
+        </div>
+        <div class="fact">
+          <div class="k" data-en="Availability" data-es="Disponibilidad">Availability</div>
+          <div class="v" data-en="Wishlist and store page coming soon" data-es="Wishlist y página de tienda, pronto">
+            Wishlist and store page coming soon</div>
+        </div>
+        <div class="fact">
+          <div class="k" data-en="Contact" data-es="Contacto">Contact</div>
+          <div class="v"><a href="mailto:ace87studio@gmail.com">ace87studio@gmail.com</a></div>
+        </div>
+        <div class="fact">
+          <div class="k" data-en="Players" data-es="Jugadores">Players</div>
+          <div class="v" data-en="Single-player" data-es="Un jugador">Single-player</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kick" data-en="Highlights" data-es="Lo destacado">Highlights</span>
+        <h2 data-en="Features" data-es="Características">Features</h2>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="ico">💧</div>
+          <h3 data-en="Real liquid, on the GPU" data-es="Líquido de verdad, en la GPU">Real liquid, on the GPU</h3>
+          <p data-en="The sealant is a proper fluid sim. It pours, keeps moving after a stroke, levels itself out and slowly settles. Nothing here is faked with stickers."
+            data-es="El sellador es una simulación de fluido posta. Se vuelca, sigue corriendo después de cada pasada, se empareja solo y se asienta de a poco. Nada acá está fingido con calcos.">
+            The sealant is a proper fluid sim. It pours, keeps moving after a stroke, levels itself out and slowly
+            settles. Nothing here is faked with stickers.</p>
+        </div>
+        <div class="card">
+          <div class="ico">🧴</div>
+          <h3 data-en="The hose" data-es="La manguera">The hose</h3>
+          <p data-en="Pour material with different spouts, each with its own spread and colour. Your tank drains while you work, so you cannot just spray forever."
+            data-es="Volcá material con distintas boquillas, cada una con su alcance y color. El tanque se vacía mientras trabajás, así que no podés rociar para siempre.">
+            Pour material with different spouts, each with its own spread and colour. Your tank drains while you work,
+            so you cannot just spray forever.</p>
+        </div>
+        <div class="card">
+          <div class="ico">🧹</div>
+          <h3 data-en="The squeegee" data-es="El secador">The squeegee</h3>
+          <p data-en="Spread the sealant in any direction, switch the head between layouts, and push the coat just by walking across it."
+            data-es="Esparcí el sellador en cualquier dirección, cambiá la orientación de el secador y empujá la capa con solo caminar sobre ella.">
+            Spread the sealant in any direction, switch the head between layouts, and push the coat just by walking
+            across it.</p>
+        </div>
+        <div class="card">
+          <div class="ico">⛽</div>
+          <h3 data-en="Tank and refill loop" data-es="Tanque y recarga">Tank and refill loop</h3>
+          <p data-en="Out of material? Find a refill station. They light up when you look at them and pulse through walls when your tank runs dry, so you never wander around lost."
+            data-es="¿Te quedaste sin material? Buscá una estación de recarga. Se iluminan cuando las mirás y titilan a través de las paredes cuando el tanque está vacío, así nunca andás perdido.">
+            Out of material? Find a refill station. They light up when you look at them and pulse through walls when
+            your tank runs dry, so you never wander around lost.</p>
+        </div>
+        <div class="card">
+          <div class="ico">✅</div>
+          <h3 data-en="Coverage that counts" data-es="Cobertura que cuenta">Coverage that counts</h3>
+          <p data-en="Every surface knows exactly how covered it is. Missed spots glow so you can track them down, and the level wraps up at a full 100%."
+            data-es="Cada superficie sabe exactamente cuánto está cubierta. Los lugares sin sellar brillan para que los encuentres, y el nivel se completa al llegar al 100%.">
+            Every surface knows exactly how covered it is. Missed spots glow so you can track them down, and the level
+            wraps up at a full 100%.</p>
+        </div>
+        <div class="card">
+          <div class="ico">🪟</div>
+          <h3 data-en="The before and after" data-es="El antes y el después">The before and after</h3>
+          <p data-en="Each level takes a photo before you start and after you finish. The win screen lets you drag a slider between the two to show off the work."
+            data-es="Cada nivel saca una foto antes de empezar y otra al terminar. La pantalla de victoria te deja arrastrar un control entre las dos para lucir el trabajo.">
+            Each level takes a photo before you start and after you finish. The win screen lets you drag a slider
+            between the two to show off the work.</p>
+        </div>
+        <div class="card">
+          <div class="ico">⏱️</div>
+          <h3 data-en="Times, stars and payouts" data-es="Tiempos, estrellas y pagos">Times, stars and payouts</h3>
+          <p data-en="Beat your own best time (pausing does not count), earn up to three stars, and pocket each level's reward."
+            data-es="Superá tu mejor tiempo (las pausas no cuentan), ganá hasta tres estrellas y embolsá la recompensa de cada nivel.">
+            Beat your own best time (pausing does not count), earn up to three stars, and pocket each level's reward.
+          </p>
+        </div>
+        <div class="card">
+          <div class="ico">🗺️</div>
+          <h3 data-en="Levels and modes" data-es="Niveles y modos">Levels and modes</h3>
+          <p data-en="Pick jobs from a level hub that remembers your best runs, across Free, Story and Challenge play."
+            data-es="Elegí trabajos desde un menú de niveles que recuerda tus mejores partidas, entre los modos Libre, Historia y Desafío.">
+            Pick jobs from a level hub that remembers your best runs, across Free, Story and Challenge play.</p>
+        </div>
+        <div class="card">
+          <div class="ico">🎨</div>
+          <h3 data-en="A warm toon world" data-es="Un mundo cartoon">A warm toon world</h3>
+          <p data-en="A cosy cream and orange cartoon style, a glossy wet-look sealant, and a friendly suburban block to work your way through."
+            data-es="Un estilo cartoon cálido en crema y naranja, un sellador con brillo mojado y un barrio tranquilo para ir completando.">
+            A cosy cream and orange cartoon style, a glossy wet-look sealant, and a friendly suburban block to work your
+            way through.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tech">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kick" data-en="Under the hood" data-es="Por dentro">Under the hood</span>
+        <h2 data-en="Technology" data-es="Tecnología">Technology</h2>
+      </div>
+      <p class="lead" style="margin-bottom:22px"
+        data-en="A lot of the game runs on a custom, GPU-based sealant system and a handful of hand-written shaders."
+        data-es="Buena parte del juego corre sobre un sistema de sellador hecho a medida en la GPU y varios shaders escritos a mano.">
+        A lot of the game runs on a custom, GPU-based sealant system and a handful of hand-written shaders.</p>
+      <ul class="tech">
+        <li data-en="<b>GPU fluid simulation</b> with pour, spread, settle, flow, push and advect passes."
+          data-es="<b>Simulación de fluido en GPU</b> con pasadas de volcado, esparcido, asentado, flujo, empuje y advección.">
+          <b>GPU fluid simulation</b> with pour, spread, settle, flow, push and advect passes.
+        </li>
+        <li data-en="<b>Live coverage tracking</b> read back from the GPU to drive progress and the win condition."
+          data-es="<b>Seguimiento de cobertura en vivo</b> que se lee desde la GPU para manejar el progreso y la victoria.">
+          <b>Live coverage tracking</b> read back from the GPU to drive progress and the win condition.
+        </li>
+        <li data-en="<b>A viscous sealant shader</b> with a wet sheen, glossy puddles and a finish glow."
+          data-es="<b>Un shader de sellador viscoso</b> con brillo mojado, charcos lustrosos y un destello al completar.">
+          <b>A viscous sealant shader</b> with a wet sheen, glossy puddles and a finish glow.
+        </li>
+        <li data-en="<b>A spline-based toon hose</b> you route through the scene."
+          data-es="<b>Una manguera toon con splines</b> que se traza por la escena."><b>A spline-based toon hose</b> you
+          route through the scene.</li>
+        <li data-en="<b>World-space boundary lines</b> that only show up when you get close."
+          data-es="<b>Líneas de límite en espacio de mundo</b> que solo aparecen cuando te acercás."><b>World-space
+            boundary lines</b> that only show up when you get close.</li>
+        <li data-en="<b>An outline system</b> that pulses through walls to guide you."
+          data-es="<b>Un sistema de contorno</b> que titila a través de las paredes para guiarte."><b>An outline
+            system</b> that pulses through walls to guide you.</li>
+        <li data-en="<b>Clean, decoupled services</b> for audio, surfaces, timing and progress."
+          data-es="<b>Servicios ordenados y desacoplados</b> para audio, superficies, tiempos y progreso."><b>Clean,
+            decoupled services</b> for audio, surfaces, timing and progress.</li>
+        <li data-en="<b>Layered audio</b> with satisfying pours, scrapes and rising star chimes."
+          data-es="<b>Audio por capas</b> con volcados, raspados y campanitas ascendentes que dan gusto."><b>Layered
+            audio</b> with satisfying pours, scrapes and rising star chimes.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="media">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kick" data-en="Media" data-es="Media">Media</span>
+        <h2 data-en="Trailer, gameplay and screenshots" data-es="Tráiler, gameplay y capturas">Trailer, gameplay and
+          screenshots</h2>
+        <a class="btn" href="#media" style="margin-left:auto" onclick="downloadAll();return false;"
+          data-en="⬇ Download all photos" data-es="⬇ Descargar todas las fotos">⬇ Download all photos</a>
+      </div>
+
+      <div class="media2">
+        <div class="ph trailer">
+          <span class="soon" data-en="Coming soon" data-es="Próximamente">Coming soon</span>
+          <div>
+            <div class="ph-ico">▶</div><span data-en="TRAILER" data-es="TRÁILER">TRAILER</span>
+          </div>
+        </div>
+        <div class="trailer video-embed">
+          <iframe src="https://www.youtube.com/embed/WKKDlwxt_g8" title="Sealcoating Simulator — Gameplay"
+            frameborder="0" loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div class="shots">
+        <div class="shot"><img src="assets/screenshots/Sealcoating%20Menu.png" alt="Main menu" loading="lazy"><a
+            class="dl" href="assets/screenshots/Sealcoating%20Menu.png" download><svg viewBox="0 0 24 24">
+              <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+            </svg><span data-en="Download" data-es="Descargar">Download</span></a></div>
+        <div class="shot"><img src="assets/screenshots/Sealcoating%20Chorro.png" alt="Pouring sealant with the hose"
+            loading="lazy"><a class="dl" href="assets/screenshots/Sealcoating%20Chorro.png" download><svg
+              viewBox="0 0 24 24">
+              <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+            </svg><span data-en="Download" data-es="Descargar">Download</span></a></div>
+        <div class="shot"><img src="assets/screenshots/Sealcoating%20Barrido%201.png" alt="Spreading with the squeegee"
+            loading="lazy"><a class="dl" href="assets/screenshots/Sealcoating%20Barrido%201.png" download><svg
+              viewBox="0 0 24 24">
+              <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+            </svg><span data-en="Download" data-es="Descargar">Download</span></a></div>
+        <div class="shot"><img src="assets/screenshots/Sealcoating%20Barrido%202.png" alt="Spreading with the squeegee"
+            loading="lazy"><a class="dl" href="assets/screenshots/Sealcoating%20Barrido%202.png" download><svg
+              viewBox="0 0 24 24">
+              <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+            </svg><span data-en="Download" data-es="Descargar">Download</span></a></div>
+        <div class="shot"><img src="assets/screenshots/Sealcoating%202.png" alt="In-game seal coating" loading="lazy"><a
+            class="dl" href="assets/screenshots/Sealcoating%202.png" download><svg viewBox="0 0 24 24">
+              <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+            </svg><span data-en="Download" data-es="Descargar">Download</span></a></div>
+        <div class="shot"><img src="assets/screenshots/Sealcoating%20Faltante.png" alt="Missed spots highlighted"
+            loading="lazy"><a class="dl" href="assets/screenshots/Sealcoating%20Faltante.png" download><svg
+              viewBox="0 0 24 24">
+              <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+            </svg><span data-en="Download" data-es="Descargar">Download</span></a></div>
+        <div class="shot"><img src="assets/screenshots/Sealcoating%20Recargar.png" alt="Refilling the tank"
+            loading="lazy"><a class="dl" href="assets/screenshots/Sealcoating%20Recargar.png" download><svg
+              viewBox="0 0 24 24">
+              <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+            </svg><span data-en="Download" data-es="Descargar">Download</span></a></div>
+        <div class="shot"><img src="assets/screenshots/Sealcoating%2099_.png" alt="Nearly complete coverage"
+            loading="lazy"><a class="dl" href="assets/screenshots/Sealcoating%2099_.png" download><svg
+              viewBox="0 0 24 24">
+              <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+            </svg><span data-en="Download" data-es="Descargar">Download</span></a></div>
+        <div class="shot"><img src="assets/screenshots/Sealcoating%20Lvl%20Completado.png" alt="Level completed"
+            loading="lazy"><a class="dl" href="assets/screenshots/Sealcoating%20Lvl%20Completado.png" download><svg
+              viewBox="0 0 24 24">
+              <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+            </svg><span data-en="Download" data-es="Descargar">Download</span></a></div>
+      </div>
+
+      <div class="sec-head" style="margin:40px 0 18px">
+        <span class="kick" data-en="Branding" data-es="Marca">Branding</span>
+        <h2 style="font-size:32px" data-en="Logos" data-es="Logos">Logos</h2>
+      </div>
+      <div class="logos">
+        <div class="logo-box card-bg">
+          <img src="assets/game-logo.png" alt="Sealcoating Simulator"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <div style="display:none">
+            <div class="ph-ico">🏢</div><span data-en="GAME LOGO" data-es="LOGO DEL JUEGO">GAME LOGO</span>
+          </div>
+          <a class="dl" href="assets/game-logo.png" download><svg viewBox="0 0 24 24">
+              <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+            </svg><span data-en="Download" data-es="Descargar">Download</span></a>
+        </div>
+        <div class="logo-box card-bg">
+          <img src="assets/ace87-studios-logo.png" alt="ACE 87 Studios"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <div style="display:none">
+            <div class="ph-ico">🏢</div><span data-en="ACE 87 STUDIOS LOGO" data-es="LOGO DE ACE 87 STUDIOS">ACE 87
+              STUDIOS LOGO</span>
+          </div>
+          <a class="dl" href="assets/ace87-studios-logo.png" download><svg viewBox="0 0 24 24">
+              <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+            </svg><span data-en="Download" data-es="Descargar">Download</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="team">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kick" data-en="The team" data-es="El equipo">The team</span>
+        <h2 data-en="About the devs" data-es="Sobre los devs">About the devs</h2>
+      </div>
+      <div class="team">
+        <div class="dev">
+          <div class="dev-head">
+            <div class="dev-avatar">
+              <img src="assets/devs/santino-casolati.jpg" alt="Santino Casolati"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+              <span class="avatar-fallback" style="display:none">SC</span>
+            </div>
+            <div>
+              <h3>Santino Casolati</h3>
+              <div class="role" data-en="Game Developer" data-es="Desarrollador de Juegos">Game Developer</div>
+            </div>
+          </div>
+          <p data-en="Santino is the developer behind Sealcoating Simulator. He builds the game's systems and tech, from the GPU-simulated sealant and custom shaders to the tools, UI and gameplay code that make every coat feel right."
+            data-es="Santino es el desarrollador detrás de Sealcoating Simulator. Construye los sistemas y la tecnología del juego, desde el sellador simulado en la GPU y los shaders a medida hasta las herramientas, la UI y el código de gameplay que hacen que cada capa se sienta bien.">
+            Santino is the developer behind Sealcoating Simulator. He builds the game's systems and tech, from the
+            GPU-simulated sealant and custom shaders to the tools, UI and gameplay code that make every coat feel right.
+          </p>
+          <a class="devlink" href="https://www.linkedin.com/in/santinocasolati/" target="_blank" rel="noopener"><svg
+              viewBox="0 0 24 24">
+              <path
+                d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68 1.69 1.69 0 0 0-1.68-1.69 1.69 1.69 0 0 0-1.69 1.69 1.68 1.68 0 0 0 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+            </svg>LinkedIn</a>
+        </div>
+        <div class="dev">
+          <div class="dev-head">
+            <div class="dev-avatar">
+              <img src="assets/devs/agustin-vila.jpg" alt="Agustin Vila"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+              <span class="avatar-fallback" style="display:none">AV</span>
+            </div>
+            <div>
+              <h3>Agustin Vila</h3>
+              <div class="role" data-en="Game Designer" data-es="Diseñador de Juegos">Game Designer</div>
+            </div>
+          </div>
+          <p data-en="Agustin is the game designer. He shapes the core loop, mechanics and levels, tuning the pacing and feel so that sealing a driveway stays satisfying from the first pour to a clean 100%."
+            data-es="Agustin es el diseñador del juego. Da forma al loop principal, las mecánicas y los niveles, ajustando el ritmo y la sensación para que sellar una entrada sea satisfactorio desde el primer volcado hasta un 100% prolijo.">
+            Agustin is the game designer. He shapes the core loop, mechanics and levels, tuning the pacing and feel so
+            that sealing a driveway stays satisfying from the first pour to a clean 100%.</p>
+          <a class="devlink" href="https://www.linkedin.com/in/agustinvila87/" target="_blank" rel="noopener"><svg
+              viewBox="0 0 24 24">
+              <path
+                d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68 1.69 1.69 0 0 0-1.68-1.69 1.69 1.69 0 0 0-1.69 1.69 1.68 1.68 0 0 0 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+            </svg>LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <div class="foot-logo"><img src="assets/ace87-studios-logo.png" alt="ACE 87 Studios"
+              onerror="this.parentElement.style.display='none'"></div>
+          <h3>Sealcoating Simulator</h3>
+          <p data-en="A first-person seal-coating game with sealant that actually flows. In the works at ACE 87 Studios."
+            data-es="Un juego de sellado en primera persona con sellador que fluye de verdad. En proceso en ACE 87 Studios.">
+            A first-person seal-coating game with sealant that actually flows. In the works at ACE 87 Studios.</p>
+        </div>
+        <div>
+          <div class="foot-k" data-en="Contact" data-es="Contacto">Contact</div>
+          <p><a href="mailto:ace87studio@gmail.com">ace87studio@gmail.com</a></p>
+          <p>ACE 87 Studios, Buenos Aires, Argentina</p>
+        </div>
+        <div>
+          <div class="foot-k" data-en="Links" data-es="Enlaces">Links</div>
+          <a href="https://ace87.itch.io/sealcoating-simulator" target="_blank" rel="noopener"
+            data-en="itch.io" data-es="itch.io">itch.io</a>
+          <p data-en="Steam page, coming soon" data-es="Página de Steam, pronto">Steam page, coming soon</p>
+          <p data-en="Social, coming soon" data-es="Redes, pronto">Social, coming soon</p>
+        </div>
+      </div>
+      <div class="copy">© <span id="yr"></span> ACE 87 Studios. <span
+          data-en="Sealcoating Simulator and all related marks are property of ACE 87 Studios."
+          data-es="Sealcoating Simulator y todas las marcas relacionadas son propiedad de ACE 87 Studios.">Sealcoating
+          Simulator and all related marks are property of ACE 87 Studios.</span></div>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lb-close" aria-label="Close" onclick="closeLightbox()">✕</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-bar">
+      <a class="btn" id="lb-download" href="#"><svg viewBox="0 0 24 24">
+          <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+        </svg><span data-en="Download" data-es="Descargar">Download</span></a>
+    </div>
+  </div>
+
+  <script>
+    // Mobile nav: toggle the dropdown, and close it whenever a link inside is tapped.
+    function toggleMenu() {
+      var links = document.querySelector('nav.links');
+      if (links) links.classList.toggle('open');
+    }
+    document.querySelectorAll('nav.links a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        document.querySelector('nav.links').classList.remove('open');
+      });
+    });
+
+    function setLang(l) {
+      document.documentElement.lang = l;
+      document.querySelectorAll('[data-' + l + ']').forEach(function (el) {
+        el.innerHTML = el.getAttribute('data-' + l);
+      });
+      document.querySelectorAll('.lang-btn').forEach(function (b) {
+        b.classList.toggle('active', b.dataset.lang === l);
+      });
+      try { localStorage.setItem('sc_lang', l); } catch (e) { }
+    }
+    function downloadOne(src) {
+      return fetch(src)
+        .then(function (r) { if (!r.ok) throw new Error(); return r.blob(); })
+        .then(function (blob) {
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url;
+          a.download = decodeURIComponent(src.split('/').pop());
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+        })
+        .catch(function () { });
+    }
+
+    // The little download chip downloads straight away. Clicking the image itself opens a
+    // full-screen preview with its own download button (preview-then-download, or download blind).
+    document.addEventListener('click', function (e) {
+      var chip = e.target.closest && e.target.closest('a.dl');
+      if (chip) { e.preventDefault(); downloadOne(chip.getAttribute('href')); return; }
+      var holder = e.target.closest && e.target.closest('.shot, .logo-box, .hero-art');
+      if (holder) {
+        var src = holder.querySelector('a.dl');
+        if (src) openLightbox(src.getAttribute('href'));
+      }
+    });
+
+    var _lbSrc = null;
+    function openLightbox(src) {
+      _lbSrc = src;
+      var lb = document.getElementById('lightbox');
+      document.getElementById('lb-img').src = src;
+      lb.classList.add('open');
+      lb.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      var lb = document.getElementById('lightbox');
+      lb.classList.remove('open');
+      lb.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('lb-download').addEventListener('click', function (e) {
+      e.preventDefault();
+      if (_lbSrc) downloadOne(_lbSrc);
+    });
+    document.getElementById('lightbox').addEventListener('click', function (e) {
+      if (e.target === this) closeLightbox(); // click the backdrop to dismiss
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    function downloadAll() {
+      var photos = [
+        'assets/keyart.jpg',
+        'assets/screenshots/Sealcoating%20Menu.png',
+        'assets/screenshots/Sealcoating%20Chorro.png',
+        'assets/screenshots/Sealcoating%20Barrido%201.png',
+        'assets/screenshots/Sealcoating%20Barrido%202.png',
+        'assets/screenshots/Sealcoating%202.png',
+        'assets/screenshots/Sealcoating%20Faltante.png',
+        'assets/screenshots/Sealcoating%20Recargar.png',
+        'assets/screenshots/Sealcoating%2099_.png',
+        'assets/screenshots/Sealcoating%20Lvl%20Completado.png',
+        'assets/game-logo.png', 'assets/ace87-studios-logo.png'
+      ];
+      photos.forEach(function (src, i) { setTimeout(function () { downloadOne(src); }, i * 250); });
+    }
+
+    var saved = 'en';
+    try { saved = localStorage.getItem('sc_lang') || 'en'; } catch (e) { }
+    setLang(saved);
+    document.getElementById('yr').textContent = new Date().getFullYear();
+  </script>
+</body>
+
+</html>
