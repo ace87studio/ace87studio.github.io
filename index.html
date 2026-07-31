@@ -574,6 +574,11 @@
       gap: 18px
     }
 
+    .media2.cols-2 {
+      grid-template-columns: 1fr 1fr;
+      margin-top: 18px
+    }
+
     .video-embed {
       position: relative;
       overflow: hidden;
@@ -848,7 +853,8 @@
         grid-template-columns: 1fr
       }
 
-      .media2 {
+      .media2,
+      .media2.cols-2 {
         grid-template-columns: 1fr
       }
 
@@ -1113,7 +1119,7 @@
         </div>
         <div class="fact">
           <div class="k" data-en="Platforms" data-es="Plataformas">Platforms</div>
-          <div class="v" data-en="PC (Steam), coming soon" data-es="PC (Steam), pronto">PC (Steam), coming soon</div>
+          <div class="v" data-en="PC (Steam)" data-es="PC (Steam)">PC (Steam)</div>
         </div>
         <div class="fact">
           <div class="k" data-en="Price" data-es="Precio">Price</div>
@@ -1121,8 +1127,11 @@
         </div>
         <div class="fact">
           <div class="k" data-en="Availability" data-es="Disponibilidad">Availability</div>
-          <div class="v" data-en="Wishlist and store page coming soon" data-es="Wishlist y página de tienda, pronto">
-            Wishlist and store page coming soon</div>
+          <div class="v"
+            data-en="Wishlist on &lt;a href=&quot;https://store.steampowered.com/app/5027030/Sealcoating_Simulator/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Steam&lt;/a&gt;"
+            data-es="Wishlist en &lt;a href=&quot;https://store.steampowered.com/app/5027030/Sealcoating_Simulator/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Steam&lt;/a&gt;">
+            Wishlist on <a href="https://store.steampowered.com/app/5027030/Sealcoating_Simulator/" target="_blank"
+              rel="noopener">Steam</a></div>
         </div>
         <div class="fact">
           <div class="k" data-en="Contact" data-es="Contacto">Contact</div>
@@ -1130,7 +1139,7 @@
         </div>
         <div class="fact">
           <div class="k" data-en="Players" data-es="Jugadores">Players</div>
-          <div class="v" data-en="Single-player" data-es="Un jugador">Single-player</div>
+          <div class="v" data-en="Singleplayer &amp; Coop (Local)" data-es="Un jugador y Coop (Local)">Singleplayer &amp; Coop (Local)</div>
         </div>
       </div>
     </div>
@@ -1265,17 +1274,27 @@
       </div>
 
       <div class="media2">
-        <div class="ph trailer">
+        <div class="trailer video-embed">
           <iframe src="https://www.youtube.com/embed/uXdzmSBBcZs?si=hjqTUWqfHxiQzNjE" title="Sealcoating Simulator Trailer"
             frameborder="0" loading="lazy"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
+      </div>
+
+      <div class="media2 cols-2">
         <div class="trailer video-embed">
           <iframe src="https://www.youtube.com/embed/f1a7Xk5Waf0?si=KRdBc9n8T9EmNEaH" title="Sealcoating Simulator Gameplay"
             frameborder="0" loading="lazy"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div class="ph trailer">
+          <div>
+            <div class="ph-ico">🤝</div>
+            <div data-en="Cooperative Gameplay" data-es="Gameplay Cooperativo">Cooperative Gameplay</div>
+            <small data-en="Coming soon" data-es="Próximamente">Coming soon</small>
+          </div>
         </div>
       </div>
 
